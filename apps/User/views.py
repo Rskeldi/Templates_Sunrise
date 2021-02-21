@@ -1,16 +1,19 @@
 import json
 
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
 
 from apps.User.forms import UserEditForm
 
 User = get_user_model()
 
 
+@login_required
 def update_profile(request, pk):
+    if request.user.pk != pk:
+        return HttpResponseRedirect('/')
     args = {}
 
     if request.method == 'POST':
