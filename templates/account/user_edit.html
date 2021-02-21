@@ -1,0 +1,29 @@
+{% load static %}
+{% include "content/base.html" %}
+    <title>Title</title>
+</head>
+<body>
+<div>
+    {% csrf_token %}
+    <h3>Вы - {{ object.email }}</h3>
+    <br><br>
+    <div class="obnova">
+        <h3  >Ваше имя: {{ object.first_name }}</h3>
+    </div>
+    {{ form.first_name }}
+    <br><br><br>
+    <div class="obnova2">
+        <h3>Ваша фамилия: {{ object.last_name }}</h3>
+    </div>
+    {{ form.last_name }} <br><br><br>
+    <button class="postBtn">Изменить</button>
+</div>
+<br><br><br>
+
+<h3><a href="{% url 'account_email' %}">Хотите изменить свой Email?</a></h3>
+<br><br>
+<h3><a href="{% url 'account_change_password' %}">Хотите изменить свой пароль?</a></h3>
+
+</body>
+<script src="{% static 'js/edit_user.js' %}"></script>
+</html>

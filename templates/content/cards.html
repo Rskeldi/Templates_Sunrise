@@ -1,0 +1,54 @@
+      <title>Мини Магазин</title>
+{% include "content/base.html" %}
+
+
+<body>
+{% if title %}
+<ul class="list-inline">
+  <h4 class="list-inline-item">Текущая категория: {{ title }}</h4>
+</ul>
+{% endif %}
+<div class="btn-group">
+  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Категории
+  </button>
+  <ul class="dropdown-menu">
+    {% for category in categories %}
+    <li><a class="dropdown-item" href="{% url 'category_detail' pk=category.pk %}">{{ category.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% if podcategories %}
+<div class="btn-group">
+  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Подкатегории
+  </button>
+  <ul class="dropdown-menu">
+    {% for podcategory in podcategories %}
+      <li><a class="dropdown-item" href="{% url 'category_detail' pk=podcategory.pk %}">{{ podcategory.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+
+
+    <div class="card-group">
+      {% for card in object_list %}
+      <div style="max-width: 500px !important; max-height: 350px" class="card">
+        <a class="nav-link active" style="color: black" href="{% url 'card_detail' pk=card.pk %}">
+        <img src="{{ card.image.url }}" style="width: 450" height="340px" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ card.title }}</h5>
+        </div>
+        <div class="card-footer">
+          <h3 style="color: red !important" class="text-muted">{{ card.price }} сом</h3>
+        </div>
+        <div class="card-footer">
+          <p class="display6">Категория: {{ card.category }}</p></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+</body>
